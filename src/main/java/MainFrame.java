@@ -2,12 +2,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * This class represents the main view where everything is connected to the user
+ */
 public class MainFrame extends JFrame {
     ArrayList<JButton> frameButtons = new ArrayList<>();
     JButton btnBack = new JButton();
     JPanel btnPanel = new JPanel();
     JPanel redPanel = new JPanel();
     WarframePanel panel = new WarframePanel();
+
+    /**
+     * This is the constructor for the entire application
+     * @param title the name of the window/application
+     * @param warframeArrayList a list of all warframes available
+     */
     public MainFrame(String title, ArrayList<Warframe> warframeArrayList) {
         int frameAmount = warframeArrayList.size();
         btnPanel.setBackground(Color.red);

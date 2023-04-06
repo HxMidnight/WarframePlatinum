@@ -7,7 +7,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This Class allows the program to obtain the data needed from APIs
+ */
 public class Data {
+    /**
+     * This function allows the calling to the warframe api and collects objects of all prime warframes currently
+     * @return a list with all prime warframes in game
+     */
     public ArrayList<Warframe> getWarframeData() {
         try{
 

@@ -1,5 +1,8 @@
 import static java.lang.Math.min;
 
+/**
+ * This class represents a warframe, it contains name, amount of blueprint, chassis, neuroptics, system, total sets and codename used in API
+ */
 public class Warframe {
     private String name;
     private int blueprint;
@@ -9,6 +12,10 @@ public class Warframe {
     private int total;
     private String codeName;
 
+    /**
+     * This is the constructor of a warframe with given name
+     * @param name the name of the warframe
+     */
     public Warframe(String name) {
         this.name = name;
         blueprint = 0;
@@ -67,6 +74,9 @@ public class Warframe {
         return system;
     }
 
+    /**
+     * This function calculates how many sets can be made
+     */
     private void calcTotal() {
         total = Math.min(Math.min(blueprint, chassis), Math.min(neuroptics,system));
     }
@@ -76,6 +86,9 @@ public class Warframe {
         return total;
     }
 
+    /**
+     * This function changes the name to the code name version used in warframe.market API
+     */
     private void createCodeName() {
         String[] seperatedName = name.split(" ");
         codeName = seperatedName[0].toLowerCase() + "_" + seperatedName[1].toLowerCase() + "_set";

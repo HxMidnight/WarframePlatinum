@@ -1,10 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
-//Need to add function to all other buttons + formatting
 
+/**
+ * This class represents the panel shown after user clicks on a warframe
+ */
 public class WarframePanel extends Panel {
     Warframe warframe = new Warframe("name prime");
-    JButton btn = new JButton();
     JButton addBP = new JButton();
     JButton removeBP = new JButton();
     JButton addNeuro = new JButton();
@@ -15,6 +16,10 @@ public class WarframePanel extends Panel {
     JButton removeSystem = new JButton();
     JButton addTotal = new JButton();
     JButton removeTotal = new JButton();
+
+    /**
+     * This is the constructor that adds all buttons and functions to them
+     */
     public WarframePanel() {
         super();
         updatePanel();
@@ -49,6 +54,9 @@ public class WarframePanel extends Panel {
         updatePanel();
     }
 
+    /**
+     * This function updates all values seen on screen
+     */
     private void updatePanel() {
         addBP.setText(String.valueOf(warframe.getBlueprint()));
         addNeuro.setText(String.valueOf(warframe.getNeuroptics()));
@@ -97,6 +105,9 @@ public class WarframePanel extends Panel {
         updatePanel();
     }
 
+    /**
+     * This function adds +1 to everything
+     */
     private void addTotal() {
         warframe.setBlueprint(warframe.getBlueprint()+1);
         warframe.setSystem(warframe.getSystem()+1);
@@ -105,6 +116,9 @@ public class WarframePanel extends Panel {
         updatePanel();
     }
 
+    /**
+     * This function subtracts -1 to everything
+     */
     private void removeTotal() {
         warframe.setBlueprint(warframe.getBlueprint()-1);
         warframe.setSystem(warframe.getSystem()-1);
