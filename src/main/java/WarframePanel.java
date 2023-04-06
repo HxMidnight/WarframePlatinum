@@ -6,16 +6,32 @@ import java.awt.*;
  */
 public class WarframePanel extends Panel {
     Warframe warframe = new Warframe("name prime");
-    JButton addBP = new JButton();
-    JButton removeBP = new JButton();
-    JButton addNeuro = new JButton();
-    JButton removeNeuro = new JButton();
-    JButton addChassis = new JButton();
-    JButton removeChassis = new JButton();
-    JButton addSystem = new JButton();
-    JButton removeSystem = new JButton();
-    JButton addTotal = new JButton();
-    JButton removeTotal = new JButton();
+    //BLUEPRINTS
+    JLabel blueprintLabel = new JLabel("Blueprints: ");
+    JButton addBPButton = new JButton("+");
+    JTextField bpTextField = new JTextField(2);
+    JButton removeBPButton = new JButton("-");
+    //NEUROPTICS
+    JLabel neuropticLabel = new JLabel("Neuroptics: ");
+    JButton addNeuroButton = new JButton("+");
+    JTextField neuropticTextField = new JTextField(2);
+    JButton removeNeuroButton = new JButton("-");
+    //CHASSIS
+    JLabel chassisLabel = new JLabel("Chassis: ");
+    JButton addChassisButton = new JButton("+");
+    JTextField chassisTextField = new JTextField(2);
+    JButton removeChassisButton = new JButton("-");
+    //SYSTEMS
+    JLabel systemLabel = new JLabel("Systems: ");
+    JButton addSystemButton = new JButton("+");
+    JTextField systemTextField = new JTextField(2);
+    JButton removeSystemButton = new JButton("-");
+    //TOTAL
+    JLabel setsLabel = new JLabel("Sets: ");
+    JButton addSetsButton = new JButton("+");
+    JTextField setsTextField = new JTextField(2);
+    JButton removeSetsButton = new JButton("-");
+
 
     /**
      * This is the constructor that adds all buttons and functions to them
@@ -23,29 +39,59 @@ public class WarframePanel extends Panel {
     public WarframePanel() {
         super();
         updatePanel();
-        addBP.addActionListener(e -> addBlueprint());
-        removeBP.addActionListener(e -> removeBlueprint());
-        addNeuro.addActionListener(e -> addNeuroptic());
-        removeNeuro.addActionListener(e -> removeNeuroptic());
-        addChassis.addActionListener(e -> addChassis());
-        removeChassis.addActionListener(e -> removeChassis());
-        addSystem.addActionListener(e -> addSystem());
-        removeSystem.addActionListener(e -> removeSystem());
-        addTotal.addActionListener(e -> addTotal());
-        removeTotal.addActionListener(e -> removeTotal());
+        addBPButton.addActionListener(e -> addBlueprint());
+        bpTextField.addActionListener(e -> changeBlueprint(bpTextField));
+        removeBPButton.addActionListener(e -> removeBlueprint());
+
+        addNeuroButton.addActionListener(e -> addNeuroptic());
+        neuropticTextField.addActionListener(e -> changeNeuroptic(neuropticTextField));
+        removeNeuroButton.addActionListener(e -> removeNeuroptic());
+
+        addChassisButton.addActionListener(e -> addChassis());
+        chassisTextField.addActionListener(e -> changeChassis(chassisTextField));
+        removeChassisButton.addActionListener(e -> removeChassis());
+
+        addSystemButton.addActionListener(e -> addSystem());
+        systemTextField.addActionListener(e -> changeSystem(systemTextField));
+        removeSystemButton.addActionListener(e -> removeSystem());
+
+        addSetsButton.addActionListener(e -> addTotal(1));
+        setsTextField.addActionListener(e -> changeTotal(setsTextField));
+        removeSetsButton.addActionListener(e -> removeTotal(1));
+
+        blueprintLabel.setForeground(Color.WHITE);
+        neuropticLabel.setForeground(Color.WHITE);
+        chassisLabel.setForeground(Color.WHITE);
+        systemLabel.setForeground(Color.WHITE);
+        setsLabel.setForeground(Color.WHITE);
+
 
         this.setBackground(Color.BLACK);
         this.setBounds(10,10,530,   530);
-        this.add(addBP);
-        this.add(removeBP);
-        this.add(addNeuro);
-        this.add(removeNeuro);
-        this.add(addChassis);
-        this.add(removeChassis);
-        this.add(addSystem);
-        this.add(removeSystem);
-        this.add(addTotal);
-        this.add(removeTotal);
+        this.add(blueprintLabel);
+        this.add(addBPButton);
+        this.add(bpTextField);
+        this.add(removeBPButton);
+
+        this.add(neuropticLabel);
+        this.add(addNeuroButton);
+        this.add(neuropticTextField);
+        this.add(removeNeuroButton);
+
+        this.add(chassisLabel);
+        this.add(addChassisButton);
+        this.add(chassisTextField);
+        this.add(removeChassisButton);
+
+        this.add(systemLabel);
+        this.add(addSystemButton);
+        this.add(systemTextField);
+        this.add(removeSystemButton);
+
+        this.add(setsLabel);
+        this.add(addSetsButton);
+        this.add(setsTextField);
+        this.add(removeSetsButton);
     }
 
     public void showPanel(Warframe warframe) {
@@ -58,11 +104,11 @@ public class WarframePanel extends Panel {
      * This function updates all values seen on screen
      */
     private void updatePanel() {
-        addBP.setText(String.valueOf(warframe.getBlueprint()));
-        addNeuro.setText(String.valueOf(warframe.getNeuroptics()));
-        addChassis.setText(String.valueOf(warframe.getChassis()));
-        addSystem.setText(String.valueOf(warframe.getSystem()));
-        addTotal.setText(String.valueOf(warframe.getTotal()));
+        neuropticTextField.setText(String.valueOf(warframe.getNeuroptics()));
+        chassisTextField.setText(String.valueOf(warframe.getChassis()));
+        systemTextField.setText(String.valueOf(warframe.getSystem()));
+        setsTextField.setText(String.valueOf(warframe.getTotal()));
+        bpTextField.setText(String.valueOf(warframe.getBlueprint()));
     }
 
     public void addBlueprint() {
@@ -108,22 +154,51 @@ public class WarframePanel extends Panel {
     /**
      * This function adds +1 to everything
      */
-    private void addTotal() {
-        warframe.setBlueprint(warframe.getBlueprint()+1);
-        warframe.setSystem(warframe.getSystem()+1);
-        warframe.setChassis(warframe.getBlueprint()+1);
-        warframe.setNeuroptics(warframe.getNeuroptics()+1);
+    private void addTotal(int add) {
+        warframe.setBlueprint(warframe.getBlueprint()+add);
+        warframe.setSystem(warframe.getSystem()+add);
+        warframe.setChassis(warframe.getChassis()+add);
+        warframe.setNeuroptics(warframe.getNeuroptics()+add);
         updatePanel();
     }
 
     /**
      * This function subtracts -1 to everything
      */
-    private void removeTotal() {
-        warframe.setBlueprint(warframe.getBlueprint()-1);
-        warframe.setSystem(warframe.getSystem()-1);
-        warframe.setChassis(warframe.getBlueprint()-1);
-        warframe.setNeuroptics(warframe.getNeuroptics()-1);
+    private void removeTotal(int subtract) {
+        warframe.setBlueprint(warframe.getBlueprint()-subtract);
+        warframe.setSystem(warframe.getSystem()-subtract);
+        warframe.setChassis(warframe.getChassis()-subtract);
+        warframe.setNeuroptics(warframe.getNeuroptics()-subtract);
+        updatePanel();
+    }
+
+    private void changeBlueprint(JTextField input) {
+        warframe.setBlueprint(Integer.valueOf(input.getText()));
+        updatePanel();
+    }
+
+    private void changeNeuroptic(JTextField input) {
+        warframe.setNeuroptics(Integer.valueOf(input.getText()));
+        updatePanel();
+    }
+
+    private void changeSystem(JTextField input) {
+        warframe.setSystem(Integer.valueOf(input.getText()));
+        updatePanel();
+    }
+    private void changeChassis(JTextField input) {
+        warframe.setChassis(Integer.valueOf(input.getText()));
+        updatePanel();
+    }
+
+    private void changeTotal(JTextField input) {
+        int oldSets = warframe.getTotal();
+        if(oldSets > Integer.valueOf(input.getText())) {
+            removeTotal(oldSets-Integer.valueOf(input.getText()));
+        } else {
+            addTotal(Integer.valueOf(input.getText())-oldSets);
+        }
         updatePanel();
     }
 }
