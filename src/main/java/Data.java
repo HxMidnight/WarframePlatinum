@@ -46,12 +46,17 @@ public class Data {
                 int length = dataObject.size();
 
                 ArrayList<Warframe> warframeArrayList = new ArrayList<>();
+                int index = 0;
 
                 for(int i = 0; i<length; i++) {
                     JSONObject object = (JSONObject) dataObject.get(i);
                     String name = (String) object.get("name");
                     System.out.println(name);
-                    warframeArrayList.add(new Warframe(name));
+                    if(name!="Excalibur Prime") {
+                        warframeArrayList.add(new Warframe(name));
+                        getWarframeSetPrices(warframeArrayList.get(index));
+                        index++;
+                    }
                 }
                 return warframeArrayList;
             }
@@ -61,9 +66,57 @@ public class Data {
         return null;
     }
 
-    public void getWarframePrices(Warframe warframe) {
+    public void getWarframeSetPrices(Warframe warframe) {
         try {
             URL url = new URL("https://api.warframe.market/v1/items/"+warframe.getCodeName()+"/orders?order_type=sell");
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.connect();
+
+            int responseCode = conn.getResponseCode();
+
+            if(responseCode != 200) {
+                throw new RuntimeException("HttpsResponseCode: " + responseCode);
+            } else {
+                StringBuilder informationString = new StringBuilder();
+
+                Scanner scanner = new Scanner(url.openStream());
+
+                while(scanner.hasNext()) {
+                    informationString.append(scanner.nextLine());
+                }
+                scanner.close();
+
+
+                String filteredString = String.valueOf(informationString).replace("{\"payload\": {\"orders\": ","");
+                filteredString = filteredString.replace("}}","");
+
+
+                JSONParser parse = new JSONParser();
+                JSONArray dataObject = (JSONArray) parse.parse(filteredString);
+
+                int length = dataObject.size();
+                double max = 0;
+                double min = 9999999;
+                double avg = 0;
+
+                for(int i=0; i<length;i++) {
+                    JSONObject object = (JSONObject) dataObject.get(i);
+                    long pricelng =  (long) object.get("platinum");
+                    double price = (double) pricelng;
+                    if(max < price) {
+                        max = price;
+                    }
+                    if(min > price) {
+                        min = price;
+                    }
+                    avg = avg + price;
+                }
+                avg = avg/(length);
+                warframe.setSetPrices(max, avg, min);
+
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

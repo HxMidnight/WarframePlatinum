@@ -9,6 +9,7 @@ public class Main {
         for(int i=0; i<warframeArrayList.size();i++) {
             System.out.println(warframeArrayList.get(i).getCodeName());
         }
+        System.out.println(warframeArrayList.get(0).getSetMax());
 
         MainFrame mframe = new MainFrame("Warframe Plat", warframeArrayList);
 

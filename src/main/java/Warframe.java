@@ -12,6 +12,9 @@ public class Warframe {
     private int total;
     private String codeName;
 
+    //rows are the different components while columns are the prices for the component min/avg/max
+    private double[][] prices = new double[3][5];
+
     /**
      * This is the constructor of a warframe with given name
      * @param name the name of the warframe
@@ -96,5 +99,34 @@ public class Warframe {
 
     public String getCodeName() {
         return codeName;
+    }
+
+    public void setSetPrices(double max, double avg, double min) {
+        prices[0][4] = min;
+        prices[1][4] = avg;
+        prices[2][4] = max;
+    }
+
+    public void setSystemPrices() {
+
+    }
+
+    public void setChassisPrices() {
+
+    }
+
+    public void setNeuropticPrices() {
+
+    }
+
+    public void setBlueprintPrices() {
+
+    }
+    public double getSetAVG() {
+        return prices[1][4];
+    }
+
+    public double getSetMax() {
+        return prices[0][4];
     }
 }

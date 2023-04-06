@@ -11,26 +11,33 @@ public class WarframePanel extends Panel {
     JButton addBPButton = new JButton("+");
     JTextField bpTextField = new JTextField(2);
     JButton removeBPButton = new JButton("-");
+    JLabel blueprintPrice = new JLabel();
     //NEUROPTICS
     JLabel neuropticLabel = new JLabel("Neuroptics: ");
     JButton addNeuroButton = new JButton("+");
     JTextField neuropticTextField = new JTextField(2);
     JButton removeNeuroButton = new JButton("-");
+    JLabel neuroPrice = new JLabel();
     //CHASSIS
     JLabel chassisLabel = new JLabel("Chassis: ");
     JButton addChassisButton = new JButton("+");
     JTextField chassisTextField = new JTextField(2);
     JButton removeChassisButton = new JButton("-");
+    JLabel chassisPrice = new JLabel();
     //SYSTEMS
     JLabel systemLabel = new JLabel("Systems: ");
     JButton addSystemButton = new JButton("+");
     JTextField systemTextField = new JTextField(2);
     JButton removeSystemButton = new JButton("-");
+    JLabel systemPrice = new JLabel();
     //TOTAL
     JLabel setsLabel = new JLabel("Sets: ");
     JButton addSetsButton = new JButton("+");
     JTextField setsTextField = new JTextField(2);
     JButton removeSetsButton = new JButton("-");
+    JLabel setsPrice = new JLabel();
+
+    JButton getPrices = new JButton("Call Prices");
 
 
     /**
@@ -92,6 +99,7 @@ public class WarframePanel extends Panel {
         this.add(addSetsButton);
         this.add(setsTextField);
         this.add(removeSetsButton);
+        this.add(setsPrice);
     }
 
     public void showPanel(Warframe warframe) {
@@ -109,6 +117,7 @@ public class WarframePanel extends Panel {
         systemTextField.setText(String.valueOf(warframe.getSystem()));
         setsTextField.setText(String.valueOf(warframe.getTotal()));
         bpTextField.setText(String.valueOf(warframe.getBlueprint()));
+        setsPrice.setText(String.valueOf(warframe.getSetMax()));
     }
 
     public void addBlueprint() {
