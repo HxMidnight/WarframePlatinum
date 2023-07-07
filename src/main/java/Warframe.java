@@ -1,3 +1,10 @@
+import org.json.simple.JSONObject;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import static java.lang.Math.min;
 
 /**
@@ -8,7 +15,7 @@ public class Warframe {
     private int blueprint;
     private int chassis;
     private int neuroptics;
-    private int system;
+    private int systems;
     private int total;
     private String codeName;
 
@@ -24,7 +31,7 @@ public class Warframe {
         blueprint = 0;
         chassis = 0;
         neuroptics = 0;
-        system = 0;
+        systems = 0;
         createCodeName();
         calcTotal();
     }
@@ -66,22 +73,22 @@ public class Warframe {
         return neuroptics;
     }
 
-    public void setSystem(int system) {
-        if(system < 0){
+    public void setSystems(int system) {
+        if(systems < 0){
             return;
         }
-        this.system = system;
+        this.systems = system;
     }
 
     public int getSystem() {
-        return system;
+        return systems;
     }
 
     /**
      * This function calculates how many sets can be made
      */
     private void calcTotal() {
-        total = Math.min(Math.min(blueprint, chassis), Math.min(neuroptics,system));
+        total = Math.min(Math.min(blueprint, chassis), Math.min(neuroptics,systems));
     }
 
     public int getTotal() {
@@ -128,5 +135,13 @@ public class Warframe {
 
     public double getSetMax() {
         return prices[0][4];
+    }
+
+    public void copyFrame(Warframe warframe) {
+        this.name = warframe.getName();
+        this.neuroptics = warframe.getNeuroptics();
+        this.systems = warframe.getSystem();
+        this.chassis = warframe.getChassis();
+        this.blueprint = warframe.getBlueprint();
     }
 }

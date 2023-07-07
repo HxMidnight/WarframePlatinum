@@ -1,11 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * This class represents the panel shown after user clicks on a warframe
  */
-public class WarframePanel extends Panel {
-    Warframe warframe = new Warframe("name prime");
+public class WarframePanel extends JFrame {
+    JPanel warframePan = new JPanel();
+    Warframe warframe;
     //BLUEPRINTS
     JLabel blueprintLabel = new JLabel("Blueprints: ");
     JButton addBPButton = new JButton("+");
@@ -39,13 +42,23 @@ public class WarframePanel extends Panel {
 
     JButton getPrices = new JButton("Call Prices");
 
+    JButton backButton = new JButton("Back");
+
 
     /**
      * This is the constructor that adds all buttons and functions to them
      */
-    public WarframePanel() {
+    public WarframePanel(Warframe warframe) {
         super();
+        JSONHandler jsonHandler = new JSONHandler();
+        this.warframe = warframe;
         updatePanel();
+        warframePan.setBackground(Color.black);
+        warframePan.setBounds(10,10,530,530);
+        GridLayout grid = new GridLayout();
+        grid.setHgap(10);
+        grid.setVgap(10);
+
         addBPButton.addActionListener(e -> addBlueprint());
         bpTextField.addActionListener(e -> changeBlueprint(bpTextField));
         removeBPButton.addActionListener(e -> removeBlueprint());
@@ -72,34 +85,46 @@ public class WarframePanel extends Panel {
         systemLabel.setForeground(Color.WHITE);
         setsLabel.setForeground(Color.WHITE);
 
+        backButton.addActionListener(e -> backing());
+
 
         this.setBackground(Color.BLACK);
-        this.setBounds(10,10,530,   530);
-        this.add(blueprintLabel);
-        this.add(addBPButton);
-        this.add(bpTextField);
-        this.add(removeBPButton);
+        this.setBounds(10,10,565,   565);
+        this.add(warframePan);
+        warframePan.add(blueprintLabel);
+        warframePan.add(addBPButton);
+        warframePan.add(bpTextField);
+        warframePan.add(removeBPButton);
 
-        this.add(neuropticLabel);
-        this.add(addNeuroButton);
-        this.add(neuropticTextField);
-        this.add(removeNeuroButton);
+        warframePan.add(neuropticLabel);
+        warframePan.add(addNeuroButton);
+        warframePan.add(neuropticTextField);
+        warframePan.add(removeNeuroButton);
 
-        this.add(chassisLabel);
-        this.add(addChassisButton);
-        this.add(chassisTextField);
-        this.add(removeChassisButton);
+        warframePan.add(chassisLabel);
+        warframePan.add(addChassisButton);
+        warframePan.add(chassisTextField);
+        warframePan.add(removeChassisButton);
 
-        this.add(systemLabel);
-        this.add(addSystemButton);
-        this.add(systemTextField);
-        this.add(removeSystemButton);
+        warframePan.add(systemLabel);
+        warframePan.add(addSystemButton);
+        warframePan.add(systemTextField);
+        warframePan.add(removeSystemButton);
 
-        this.add(setsLabel);
-        this.add(addSetsButton);
-        this.add(setsTextField);
-        this.add(removeSetsButton);
-        this.add(setsPrice);
+        warframePan.add(setsLabel);
+        warframePan.add(addSetsButton);
+        warframePan.add(setsTextField);
+        warframePan.add(removeSetsButton);
+        warframePan.add(setsPrice);
+        warframePan.add(backButton);
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                jsonHandler.writeToJSON(warframe);
+                System.exit(0);
+            }
+        });
     }
 
     public void showPanel(Warframe warframe) {
@@ -151,12 +176,12 @@ public class WarframePanel extends Panel {
     }
 
     private void addSystem() {
-        warframe.setSystem(warframe.getSystem()+1);
+        warframe.setSystems(warframe.getSystem()+1);
         updatePanel();
     }
 
     private void removeSystem() {
-        warframe.setSystem(warframe.getSystem()+1);
+        warframe.setSystems(warframe.getSystem()+1);
         updatePanel();
     }
 
@@ -165,7 +190,7 @@ public class WarframePanel extends Panel {
      */
     private void addTotal(int add) {
         warframe.setBlueprint(warframe.getBlueprint()+add);
-        warframe.setSystem(warframe.getSystem()+add);
+        warframe.setSystems(warframe.getSystem()+add);
         warframe.setChassis(warframe.getChassis()+add);
         warframe.setNeuroptics(warframe.getNeuroptics()+add);
         updatePanel();
@@ -176,38 +201,44 @@ public class WarframePanel extends Panel {
      */
     private void removeTotal(int subtract) {
         warframe.setBlueprint(warframe.getBlueprint()-subtract);
-        warframe.setSystem(warframe.getSystem()-subtract);
+        warframe.setSystems(warframe.getSystem()-subtract);
         warframe.setChassis(warframe.getChassis()-subtract);
         warframe.setNeuroptics(warframe.getNeuroptics()-subtract);
         updatePanel();
     }
 
     private void changeBlueprint(JTextField input) {
-        warframe.setBlueprint(Integer.valueOf(input.getText()));
+        warframe.setBlueprint(Integer.parseInt(input.getText()));
         updatePanel();
     }
 
     private void changeNeuroptic(JTextField input) {
-        warframe.setNeuroptics(Integer.valueOf(input.getText()));
+        warframe.setNeuroptics(Integer.parseInt(input.getText()));
         updatePanel();
     }
 
     private void changeSystem(JTextField input) {
-        warframe.setSystem(Integer.valueOf(input.getText()));
+        warframe.setSystems(Integer.parseInt(input.getText()));
         updatePanel();
     }
     private void changeChassis(JTextField input) {
-        warframe.setChassis(Integer.valueOf(input.getText()));
+        warframe.setChassis(Integer.parseInt(input.getText()));
         updatePanel();
     }
 
     private void changeTotal(JTextField input) {
         int oldSets = warframe.getTotal();
-        if(oldSets > Integer.valueOf(input.getText())) {
-            removeTotal(oldSets-Integer.valueOf(input.getText()));
+        if(oldSets > Integer.parseInt(input.getText())) {
+            removeTotal(oldSets-Integer.parseInt(input.getText()));
         } else {
-            addTotal(Integer.valueOf(input.getText())-oldSets);
+            addTotal(Integer.parseInt(input.getText())-oldSets);
         }
         updatePanel();
+    }
+
+    private void backing() {
+        new JSONHandler().writeToJSON(warframe);
+        new MainFrame("Warframe Plat", Main.warframeArrayList).setVisible(true);
+        this.dispose();
     }
 }

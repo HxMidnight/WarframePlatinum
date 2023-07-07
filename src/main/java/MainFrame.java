@@ -10,7 +10,6 @@ public class MainFrame extends JFrame {
     JButton btnBack = new JButton();
     JPanel btnPanel = new JPanel();
     JPanel redPanel = new JPanel();
-    WarframePanel panel = new WarframePanel();
 
     /**
      * This is the constructor for the entire application
@@ -24,18 +23,18 @@ public class MainFrame extends JFrame {
         GridLayout grid = new GridLayout();
         grid.setHgap(10);
         grid.setVgap(10);
+        this.setBounds(10,10,565,   565);
 
         btnBack.setText("BACK");
         btnBack.addActionListener(e -> closeWindow());
 
-        for(int i=0;i<frameAmount;i++) {
+        for (Warframe warframe : warframeArrayList) {
             JButton btn = new JButton();
-            btn.setText(warframeArrayList.get(i).getName());
+            btn.setText(warframe.getName());
             btn.setFocusable(false);
             btn.setHorizontalAlignment(JButton.LEFT);
             btn.setHorizontalTextPosition(JButton.RIGHT);
-            Warframe frame = warframeArrayList.get(i);
-            btn.addActionListener(e -> openWindow(frame));
+            btn.addActionListener(e -> openWindow(warframe));
             frameButtons.add(btn);
         }
 
@@ -46,7 +45,6 @@ public class MainFrame extends JFrame {
         this.setVisible(true);
         this.add(btnPanel);
         this.add(redPanel);
-        this.add(panel);
         redPanel.add(btnBack);
         for(int i=0;i<frameAmount;i++) {
             btnPanel.add(frameButtons.get(i));
@@ -55,12 +53,12 @@ public class MainFrame extends JFrame {
 
     private void openWindow(Warframe warframe) {
         btnPanel.setVisible(false);
-        panel.showPanel(warframe);
+        new WarframePanel(warframe).setVisible(true);
+        this.dispose();
     }
 
     private void closeWindow() {
         btnPanel.setVisible(true);
-        panel.setVisible(false);
         redPanel.setVisible(false);
     }
 }
