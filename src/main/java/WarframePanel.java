@@ -50,7 +50,6 @@ public class WarframePanel extends JFrame {
      */
     public WarframePanel(Warframe warframe) {
         super();
-        JSONHandler jsonHandler = new JSONHandler();
         this.warframe = warframe;
         updatePanel();
         warframePan.setBackground(Color.black);
@@ -121,7 +120,7 @@ public class WarframePanel extends JFrame {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                jsonHandler.writeToJSON(warframe);
+                new JSONHandler().writeToJSON(warframe);
                 System.exit(0);
             }
         });

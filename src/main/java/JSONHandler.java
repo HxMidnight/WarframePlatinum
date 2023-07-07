@@ -1,6 +1,8 @@
+import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsoner;
 import netscape.javascript.JSObject;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.io.BufferedWriter;
@@ -9,19 +11,17 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class JSONHandler {
-    private JsonObject makeJSONObject(Warframe warframe) {
-        JsonObject frames = new JsonObject();
-        for(int x=0; x<Main.warframeArrayList.size();x++) {
-            if(warframe.getName().equalsIgnoreCase(Main.warframeArrayList.get(x).getName())) {
-                Main.warframeArrayList.get(x).copyFrame(warframe);
-            }
+    private JsonArray makeJSONObject(Warframe warframe) {
+        JsonArray frames = new JsonArray();
+        for(Warframe warframes : Main.warframeArrayList) {
             JsonObject warframeObj = new JsonObject();
-            warframeObj.put("name",Main.warframeArrayList.get(x).getName());
-            warframeObj.put("blueprints", Main.warframeArrayList.get(x).getBlueprint());
-            warframeObj.put("neuroptics", Main.warframeArrayList.get(x).getNeuroptics());
-            warframeObj.put("chassis", Main.warframeArrayList.get(x).getChassis());
-            warframeObj.put("systems",Main.warframeArrayList.get(x).getSystem());
-            frames.put("frames",warframeObj);
+            warframeObj.put("name",warframes.getName());
+            warframeObj.put("blueprints", warframes.getBlueprint());
+            warframeObj.put("neuroptics", warframes.getNeuroptics());
+            warframeObj.put("chassis", warframes.getChassis());
+            warframeObj.put("systems",warframes.getSystem());
+
+            frames.add(warframeObj);
         }
 
         return frames;
