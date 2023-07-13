@@ -36,6 +36,16 @@ public class Warframe {
         calcTotal();
     }
 
+    public Warframe(String name, int blueprint, int chassis, int neuroptics, int systems) {
+        this.name = name;
+        this.blueprint = blueprint;
+        this.chassis = chassis;
+        this.neuroptics = neuroptics;
+        this.systems = systems;
+        createCodeName();
+        calcTotal();
+    }
+
     public String getName() {
         return name;
     }
