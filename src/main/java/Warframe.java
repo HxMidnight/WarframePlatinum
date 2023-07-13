@@ -20,7 +20,9 @@ public class Warframe {
     private String codeName;
 
     //rows are the different components while columns are the prices for the component min/avg/max
-    private double[][] prices = new double[3][5];
+    private double max;
+    private double min;
+    private double avg;
 
     /**
      * This is the constructor of a warframe with given name
@@ -119,32 +121,20 @@ public class Warframe {
     }
 
     public void setSetPrices(double max, double avg, double min) {
-        prices[0][4] = min;
-        prices[1][4] = avg;
-        prices[2][4] = max;
-    }
-
-    public void setSystemPrices() {
-
-    }
-
-    public void setChassisPrices() {
-
-    }
-
-    public void setNeuropticPrices() {
-
-    }
-
-    public void setBlueprintPrices() {
-
+        this.max = max;
+        this.avg = Double.parseDouble(String.format("%.02f", (float) avg));
+        this.min = min;
     }
     public double getSetAVG() {
-        return prices[1][4];
+        return avg;
     }
 
     public double getSetMax() {
-        return prices[0][4];
+        return max;
+    }
+
+    public double getSetMin() {
+        return min;
     }
 
     public void copyFrame(Warframe warframe) {

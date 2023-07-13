@@ -1,7 +1,11 @@
+import com.github.cliftonlabs.json_simple.JsonArray;
+import com.github.cliftonlabs.json_simple.JsonObject;
+import com.github.cliftonlabs.json_simple.Jsoner;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -89,32 +93,30 @@ public class Data {
                 scanner.close();
 
 
-                String filteredString = String.valueOf(informationString).replace("{\"payload\": {\"orders\": ","");
-                filteredString = filteredString.replace("}}","");
+                JsonObject dataObject = (JsonObject) Jsoner.deserialize(String.valueOf(informationString));
 
+                JsonObject payload = (JsonObject) dataObject.get("payload");
 
-                JSONParser parse = new JSONParser();
-                JSONArray dataObject = (JSONArray) parse.parse(filteredString);
+                JsonArray orders = (JsonArray) payload.get("orders");
 
-                int length = dataObject.size();
-                double max = 0;
-                double min = 9999999;
-                double avg = 0;
+                int length = orders.size();
+                final double[] max = {0};
+                final double[] min = {9999999};
+                final double[] avg = {0};
 
-                for(int i=0; i<length;i++) {
-                    JSONObject object = (JSONObject) dataObject.get(i);
-                    long pricelng =  (long) object.get("platinum");
-                    double price = (double) pricelng;
-                    if(max < price) {
-                        max = price;
+                orders.forEach(entry -> {
+                    JsonObject ords = (JsonObject) entry;
+                    BigDecimal plat = (BigDecimal) ords.get("platinum");
+                    if(max[0] < plat.doubleValue()) {
+                        max[0] = plat.doubleValue();
                     }
-                    if(min > price) {
-                        min = price;
+                    if(min[0] > plat.doubleValue()) {
+                        min[0] = plat.doubleValue();
                     }
-                    avg = avg + price;
-                }
-                avg = avg/(length);
-                warframe.setSetPrices(max, avg, min);
+                    avg[0] = avg[0] + plat.doubleValue();
+                });
+                double total = avg[0] /(length);
+                warframe.setSetPrices(max[0], total, min[0]);
 
             }
         } catch (Exception e) {

@@ -9,9 +9,12 @@ public class Main {
         Data data = new Data();
         warframeArrayList = data.getWarframeData();
         for (Warframe warframe : warframeArrayList) {
-            System.out.println(warframe.getCodeName());
+            data.getWarframeSetPrices(warframe);
         }
+        data.getWarframeSetPrices(warframeArrayList.get(0));
         System.out.println(warframeArrayList.get(0).getSetMax());
+        System.out.println(warframeArrayList.get(0).getSetAVG());
+        System.out.println(warframeArrayList.get(0).getSetMin());
 
         boolean same = warframeArrayList.size()==tempList.size();
         System.out.println("are they equal?" + same);

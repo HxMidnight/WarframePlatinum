@@ -22,6 +22,9 @@ public class JSONHandler {
             warframeObj.put("neuroptics", warframes.getNeuroptics());
             warframeObj.put("chassis", warframes.getChassis());
             warframeObj.put("systems",warframes.getSystem());
+            warframeObj.put("max", warframes.getSetMax());
+            warframeObj.put("min",warframes.getSetMin());
+            warframeObj.put("avg", warframes.getSetAVG());
 
             frames.add(warframeObj);
         }
@@ -61,7 +64,11 @@ public class JSONHandler {
                 BigDecimal chassis = (BigDecimal) frame.get("chassis");
                 BigDecimal system = (BigDecimal) frame.get("systems");
                 BigDecimal neuroptics = (BigDecimal) frame.get("neuroptics");
+                BigDecimal max = (BigDecimal) frame.get("max");
+                BigDecimal min = (BigDecimal) frame.get("min");
+                BigDecimal avg = (BigDecimal) frame.get("avg");
                 Warframe tempFrame = new Warframe(name, blueprint.intValue(), chassis.intValue(), neuroptics.intValue(), system.intValue());
+                tempFrame.setSetPrices(max.doubleValue(), avg.doubleValue(), min.doubleValue());
                 warframeList.add(tempFrame);
             });
             reader.close();
