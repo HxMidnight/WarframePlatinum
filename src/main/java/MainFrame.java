@@ -50,12 +50,19 @@ public class MainFrame extends JFrame {
         }
     }
 
+    /**
+     * This function allows the opening of the inventory of specified warframe
+     * @param warframe the frame the user wants to look at the components of
+     */
     private void openWindow(Warframe warframe) {
         btnPanel.setVisible(false);
         new WarframePanel(warframe).setVisible(true);
         this.dispose();
     }
 
+    /**
+     * This function allows the gathering of all prices for all frames
+     */
     private void GetPrices() {
         Data data = new Data();
         for(Warframe warframe : Main.warframeArrayList) {

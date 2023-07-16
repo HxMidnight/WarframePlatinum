@@ -1,7 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
+/**
+ * This class represents the first window seen by the user after JSON file has been created
+ */
 public class IntroWindow extends JFrame {
     JPanel introPane = new JPanel();
     JPanel qstPane = new JPanel();
@@ -10,6 +12,11 @@ public class IntroWindow extends JFrame {
     JButton btnDeny = new JButton("No");
 
     JLabel lblQuestion = new JLabel("Do you want to update warframes?");
+
+    /**
+     * This function constructs and shows the window for the user to choose to connect to API or JSON
+     * @param title the title of the window
+     */
     public IntroWindow (String title){
         lblQuestion.setForeground(Color.white);
         qstPane.setBackground(Color.red);
@@ -35,6 +42,9 @@ public class IntroWindow extends JFrame {
 
     }
 
+    /**
+     * This function allows the connection to the API to update frames
+     */
     public void ConnectToAPI() {
         Data data = new Data();
         Main.warframeArrayList = data.getWarframeData();
@@ -42,6 +52,9 @@ public class IntroWindow extends JFrame {
         this.dispose();
     }
 
+    /**
+     * This function allows the connection to the JSON file to update frames
+     */
     public void ConnectToJSON() {
         JSONHandler json = new JSONHandler();
         Main.warframeArrayList = json.readJSON();

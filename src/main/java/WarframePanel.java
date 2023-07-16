@@ -4,7 +4,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 /**
- * This class represents the panel shown after user clicks on a warframe
+ * This class represents the panel shown after user clicks on a warframe AKA inventory management
  */
 public class WarframePanel extends JFrame {
     JPanel warframePan = new JPanel();
@@ -130,12 +130,15 @@ public class WarframePanel extends JFrame {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                new JSONHandler().writeToJSON(warframe);
+                new JSONHandler().writeToJSON();
                 System.exit(0);
             }
         });
     }
 
+    /**
+     * This function collects all the prices for this specified warframe
+     */
     private void getWarframePrice() {
         Data data = new Data();
         data.getWarframeSetPrices(warframe);
@@ -155,41 +158,65 @@ public class WarframePanel extends JFrame {
         bpTextField.setText(String.valueOf(warframe.getBlueprint()));
     }
 
+    /**
+     * This function allows the addition of 1 blueprint
+     */
     public void addBlueprint() {
         warframe.setBlueprint(warframe.getBlueprint()+1);
         updatePanel();
     }
 
+    /**
+     * This function allows the removal of 1 blueprint
+     */
     private void removeBlueprint() {
         warframe.setBlueprint(warframe.getBlueprint()-1);
         updatePanel();
     }
 
+    /**
+     * This function allows the addition of 1 neuroptic
+     */
     private void addNeuroptic() {
         warframe.setNeuroptics(warframe.getNeuroptics()+1);
         updatePanel();
     }
 
+    /**
+     * This function allows the removal of 1 neuroptic
+     */
     private void removeNeuroptic() {
         warframe.setNeuroptics(warframe.getNeuroptics()-1);
         updatePanel();updatePanel();
     }
 
+    /**
+     * This function allows the addition of 1 chassis
+     */
     private void addChassis() {
         warframe.setChassis(warframe.getChassis()+1);
         updatePanel();
     }
 
+    /**
+     * This function allows the removal of 1 chassis
+     */
     private void removeChassis() {
         warframe.setChassis(warframe.getChassis()-1);
         updatePanel();
     }
 
+    /**
+     * This function allows the addition of 1 system
+     */
     private void addSystem() {
         warframe.setSystems(warframe.getSystem()+1);
         updatePanel();
     }
 
+    /**
+     * This function allows the removal of 1 system
+     */
     private void removeSystem() {
         warframe.setSystems(warframe.getSystem()+1);
         updatePanel();
@@ -217,25 +244,46 @@ public class WarframePanel extends JFrame {
         updatePanel();
     }
 
+    /**
+     * This function allows the change of the entire blueprint amount
+     * @param input the new amount of blueprints
+     */
     private void changeBlueprint(JTextField input) {
         warframe.setBlueprint(Integer.parseInt(input.getText()));
         updatePanel();
     }
 
+    /**
+     * This function allows the change of the entire neuroptics amount
+     * @param input the new amount of neuroptics
+     */
     private void changeNeuroptic(JTextField input) {
         warframe.setNeuroptics(Integer.parseInt(input.getText()));
         updatePanel();
     }
 
+    /**
+     * This function allows the change of the entire systems amount
+     * @param input the new amount of systems
+     */
     private void changeSystem(JTextField input) {
         warframe.setSystems(Integer.parseInt(input.getText()));
         updatePanel();
     }
+
+    /**
+     * This function allows the change of the entire chassis amount
+     * @param input the new amount of chassis
+     */
     private void changeChassis(JTextField input) {
         warframe.setChassis(Integer.parseInt(input.getText()));
         updatePanel();
     }
 
+    /**
+     * This function allows the change of the entire total amount
+     * @param input the new amount of all components
+     */
     private void changeTotal(JTextField input) {
         int oldSets = warframe.getTotal();
         if(oldSets > Integer.parseInt(input.getText())) {
@@ -246,8 +294,11 @@ public class WarframePanel extends JFrame {
         updatePanel();
     }
 
+    /**
+     * This function allows the user to go back to the warframe selection
+     */
     private void backing() {
-        new JSONHandler().writeToJSON(warframe);
+        new JSONHandler().writeToJSON();
         new MainFrame("Warframe Plat").setVisible(true);
         this.dispose();
     }

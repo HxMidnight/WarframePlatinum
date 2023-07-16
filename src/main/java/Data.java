@@ -65,6 +65,10 @@ public class Data {
         return null;
     }
 
+    /**
+     * This function gathers the maximum, minimum and average set prices of specified warframe
+     * @param warframe the frame to find the prices of
+     */
     public void getWarframeSetPrices(Warframe warframe) {
         try {
             URL url = new URL("https://api.warframe.market/v1/items/"+warframe.getCodeName()+"/orders?order_type=sell");

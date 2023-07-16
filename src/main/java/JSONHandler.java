@@ -1,10 +1,7 @@
 import com.github.cliftonlabs.json_simple.JsonArray;
-import com.github.cliftonlabs.json_simple.JsonException;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsoner;
-import netscape.javascript.JSObject;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -12,8 +9,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/**
+ * This class allows the program to handle the writing and reading of JSON files
+ */
 public class JSONHandler {
-    private JsonObject makeJSONObject(Warframe warframe) {
+    /**
+     * This function allows the creation of an object of all frames to be written in a JSON file
+     * @return an JSON object including all warframes with their corresponding attributes
+     */
+    private JsonObject makeJSONObject() {
         JsonArray frames = new JsonArray();
         for(Warframe warframes : Main.warframeArrayList) {
             JsonObject warframeObj = new JsonObject();
@@ -35,17 +39,24 @@ public class JSONHandler {
         return writeFrames;
     }
 
-    public void writeToJSON(Warframe warframe) {
+    /**
+     * This function allows the writing of the JSON file with all frames available
+     */
+    public void writeToJSON() {
         try {
             BufferedWriter writer = Files.newBufferedWriter(Paths.get("warframe.json"));
 
-            Jsoner.serialize(makeJSONObject(warframe), writer);
+            Jsoner.serialize(makeJSONObject(), writer);
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * This allows the read of a previously generated JSON file with frames
+     * @return a list of all the saved warframes in the file
+     */
     public ArrayList<Warframe> readJSON() {
         try {
 
