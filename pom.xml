@@ -12,7 +12,7 @@
     <dependency>
         <groupId>com.github.cliftonlabs</groupId>
         <artifactId>json-simple</artifactId>
-        <version>3.1.0</version>
+        <version>4.0.1</version>
     </dependency>
 </dependencies>
 

@@ -1,11 +1,3 @@
-import org.json.simple.JSONObject;
-
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import static java.lang.Math.min;
 
 /**
  * This class represents a warframe, it contains name, amount of blueprint, chassis, neuroptics, system, total sets and codename used in API
