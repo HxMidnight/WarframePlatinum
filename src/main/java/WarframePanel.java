@@ -14,31 +14,29 @@ public class WarframePanel extends JFrame {
     JButton addBPButton = new JButton("+");
     JTextField bpTextField = new JTextField(2);
     JButton removeBPButton = new JButton("-");
-    JLabel blueprintPrice = new JLabel();
     //NEUROPTICS
     JLabel neuropticLabel = new JLabel("Neuroptics: ");
     JButton addNeuroButton = new JButton("+");
     JTextField neuropticTextField = new JTextField(2);
     JButton removeNeuroButton = new JButton("-");
-    JLabel neuroPrice = new JLabel();
     //CHASSIS
     JLabel chassisLabel = new JLabel("Chassis: ");
     JButton addChassisButton = new JButton("+");
     JTextField chassisTextField = new JTextField(2);
     JButton removeChassisButton = new JButton("-");
-    JLabel chassisPrice = new JLabel();
     //SYSTEMS
     JLabel systemLabel = new JLabel("Systems: ");
     JButton addSystemButton = new JButton("+");
     JTextField systemTextField = new JTextField(2);
     JButton removeSystemButton = new JButton("-");
-    JLabel systemPrice = new JLabel();
     //TOTAL
     JLabel setsLabel = new JLabel("Sets: ");
     JButton addSetsButton = new JButton("+");
     JTextField setsTextField = new JTextField(2);
     JButton removeSetsButton = new JButton("-");
-    JLabel setsPrice = new JLabel();
+    JLabel setsMaxPrice = new JLabel();
+    JLabel setsMinPrice = new JLabel();
+    JLabel setsAvgPrice = new JLabel();
 
     JButton getPrices = new JButton("Call Prices");
 
@@ -57,6 +55,8 @@ public class WarframePanel extends JFrame {
         GridLayout grid = new GridLayout();
         grid.setHgap(10);
         grid.setVgap(10);
+
+        getPrices.addActionListener(e -> getWarframePrice());
 
         addBPButton.addActionListener(e -> addBlueprint());
         bpTextField.addActionListener(e -> changeBlueprint(bpTextField));
@@ -83,6 +83,13 @@ public class WarframePanel extends JFrame {
         chassisLabel.setForeground(Color.WHITE);
         systemLabel.setForeground(Color.WHITE);
         setsLabel.setForeground(Color.WHITE);
+        setsAvgPrice.setForeground(Color.white);
+        setsMinPrice.setForeground(Color.white);
+        setsMaxPrice.setForeground(Color.white);
+
+        setsAvgPrice.setText("Avg: "+ warframe.getSetAVG());
+        setsMaxPrice.setText("Max: "+ warframe.getSetMax());
+        setsMinPrice.setText("Min: "+ warframe.getSetMin());
 
         backButton.addActionListener(e -> backing());
 
@@ -90,6 +97,7 @@ public class WarframePanel extends JFrame {
         this.setBackground(Color.BLACK);
         this.setBounds(10,10,565,   565);
         this.add(warframePan);
+        warframePan.add(getPrices);
         warframePan.add(blueprintLabel);
         warframePan.add(addBPButton);
         warframePan.add(bpTextField);
@@ -114,7 +122,9 @@ public class WarframePanel extends JFrame {
         warframePan.add(addSetsButton);
         warframePan.add(setsTextField);
         warframePan.add(removeSetsButton);
-        warframePan.add(setsPrice);
+        warframePan.add(setsMaxPrice);
+        warframePan.add(setsMinPrice);
+        warframePan.add(setsAvgPrice);
         warframePan.add(backButton);
 
         this.addWindowListener(new WindowAdapter() {
@@ -126,10 +136,12 @@ public class WarframePanel extends JFrame {
         });
     }
 
-    public void showPanel(Warframe warframe) {
-        this.warframe = warframe;
-        System.out.println("new frame");
-        updatePanel();
+    private void getWarframePrice() {
+        Data data = new Data();
+        data.getWarframeSetPrices(warframe);
+        setsMaxPrice.setText("Max: "+warframe.getSetMax());
+        setsMinPrice.setText("Min: "+warframe.getSetMin());
+        setsAvgPrice.setText("Avg: "+warframe.getSetAVG());
     }
 
     /**
@@ -141,7 +153,6 @@ public class WarframePanel extends JFrame {
         systemTextField.setText(String.valueOf(warframe.getSystem()));
         setsTextField.setText(String.valueOf(warframe.getTotal()));
         bpTextField.setText(String.valueOf(warframe.getBlueprint()));
-        setsPrice.setText(String.valueOf(warframe.getSetMax()));
     }
 
     public void addBlueprint() {
@@ -237,7 +248,7 @@ public class WarframePanel extends JFrame {
 
     private void backing() {
         new JSONHandler().writeToJSON(warframe);
-        new MainFrame("Warframe Plat", Main.warframeArrayList).setVisible(true);
+        new MainFrame("Warframe Plat").setVisible(true);
         this.dispose();
     }
 }

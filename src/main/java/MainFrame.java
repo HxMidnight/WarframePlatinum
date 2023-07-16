@@ -14,10 +14,9 @@ public class MainFrame extends JFrame {
     /**
      * This is the constructor for the entire application
      * @param title the name of the window/application
-     * @param warframeArrayList a list of all warframes available
      */
-    public MainFrame(String title, ArrayList<Warframe> warframeArrayList) {
-        int frameAmount = warframeArrayList.size();
+    public MainFrame(String title) {
+        int frameAmount = Main.warframeArrayList.size();
         btnPanel.setBackground(Color.red);
         btnPanel.setBounds(10,10,530,530);
         GridLayout grid = new GridLayout();
@@ -25,10 +24,10 @@ public class MainFrame extends JFrame {
         grid.setVgap(10);
         this.setBounds(10,10,565,   565);
 
-        btnBack.setText("BACK");
-        btnBack.addActionListener(e -> closeWindow());
+        btnBack.setText("All Prices");
+        btnBack.addActionListener(e -> GetPrices());
 
-        for (Warframe warframe : warframeArrayList) {
+        for (Warframe warframe : Main.warframeArrayList) {
             JButton btn = new JButton();
             btn.setText(warframe.getName());
             btn.setFocusable(false);
@@ -45,7 +44,7 @@ public class MainFrame extends JFrame {
         this.setVisible(true);
         this.add(btnPanel);
         this.add(redPanel);
-        redPanel.add(btnBack);
+        btnPanel.add(btnBack);
         for(int i=0;i<frameAmount;i++) {
             btnPanel.add(frameButtons.get(i));
         }
@@ -57,8 +56,10 @@ public class MainFrame extends JFrame {
         this.dispose();
     }
 
-    private void closeWindow() {
-        btnPanel.setVisible(true);
-        redPanel.setVisible(false);
+    private void GetPrices() {
+        Data data = new Data();
+        for(Warframe warframe : Main.warframeArrayList) {
+            data.getWarframeSetPrices(warframe);
+        }
     }
 }

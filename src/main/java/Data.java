@@ -47,19 +47,14 @@ public class Data {
                 JSONParser parse = new JSONParser();
                 JSONArray dataObject = (JSONArray) parse.parse(String.valueOf(informationString));
 
-                int length = dataObject.size();
-
                 ArrayList<Warframe> warframeArrayList = new ArrayList<>();
-                int index = 0;
 
-                for(int i = 0; i<length; i++) {
-                    JSONObject object = (JSONObject) dataObject.get(i);
+                for (Object o : dataObject) {
+                    JSONObject object = (JSONObject) o;
                     String name = (String) object.get("name");
                     System.out.println(name);
-                    if(name!="Excalibur Prime") {
+                    if (!name.equals("Excalibur Prime")) {
                         warframeArrayList.add(new Warframe(name));
-                        getWarframeSetPrices(warframeArrayList.get(index));
-                        index++;
                     }
                 }
                 return warframeArrayList;
