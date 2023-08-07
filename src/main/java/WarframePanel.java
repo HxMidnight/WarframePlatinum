@@ -4,32 +4,33 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 /**
- * This class represents the panel shown after user clicks on a warframe AKA inventory management
+ * This class represents the panel shown after user clicks on a warframe AKA
+ * inventory management
  */
 public class WarframePanel extends JFrame {
     JPanel warframePan = new JPanel();
     Warframe warframe;
-    //BLUEPRINTS
+    // BLUEPRINTS
     JLabel blueprintLabel = new JLabel("Blueprints: ");
     JButton addBPButton = new JButton("+");
     JTextField bpTextField = new JTextField(2);
     JButton removeBPButton = new JButton("-");
-    //NEUROPTICS
+    // NEUROPTICS
     JLabel neuropticLabel = new JLabel("Neuroptics: ");
     JButton addNeuroButton = new JButton("+");
     JTextField neuropticTextField = new JTextField(2);
     JButton removeNeuroButton = new JButton("-");
-    //CHASSIS
+    // CHASSIS
     JLabel chassisLabel = new JLabel("Chassis: ");
     JButton addChassisButton = new JButton("+");
     JTextField chassisTextField = new JTextField(2);
     JButton removeChassisButton = new JButton("-");
-    //SYSTEMS
+    // SYSTEMS
     JLabel systemLabel = new JLabel("Systems: ");
     JButton addSystemButton = new JButton("+");
     JTextField systemTextField = new JTextField(2);
     JButton removeSystemButton = new JButton("-");
-    //TOTAL
+    // TOTAL
     JLabel setsLabel = new JLabel("Sets: ");
     JButton addSetsButton = new JButton("+");
     JTextField setsTextField = new JTextField(2);
@@ -42,7 +43,6 @@ public class WarframePanel extends JFrame {
 
     JButton backButton = new JButton("Back");
 
-
     /**
      * This is the constructor that adds all buttons and functions to them
      */
@@ -50,9 +50,10 @@ public class WarframePanel extends JFrame {
         super();
         this.warframe = warframe;
         updatePanel();
-        warframePan.setBackground(Color.black);
-        warframePan.setBounds(10,10,530,530);
+        warframePan.setBackground(new Color(53, 60, 69));
+        warframePan.setBounds(10, 10, 530, 530);
         GridLayout grid = new GridLayout();
+        UIManager.put("Button.background", new Color(86, 112, 147));
         grid.setHgap(10);
         grid.setVgap(10);
 
@@ -87,15 +88,14 @@ public class WarframePanel extends JFrame {
         setsMinPrice.setForeground(Color.white);
         setsMaxPrice.setForeground(Color.white);
 
-        setsAvgPrice.setText("Avg: "+ warframe.getSetAVG());
-        setsMaxPrice.setText("Max: "+ warframe.getSetMax());
-        setsMinPrice.setText("Min: "+ warframe.getSetMin());
+        setsAvgPrice.setText("Avg: " + warframe.getSetAVG());
+        setsMaxPrice.setText("Max: " + warframe.getSetMax());
+        setsMinPrice.setText("Min: " + warframe.getSetMin());
 
         backButton.addActionListener(e -> backing());
 
-
         this.setBackground(Color.BLACK);
-        this.setBounds(10,10,565,   565);
+        this.setBounds(10, 10, 565, 565);
         this.add(warframePan);
         warframePan.add(getPrices);
         warframePan.add(blueprintLabel);
@@ -142,9 +142,9 @@ public class WarframePanel extends JFrame {
     private void getWarframePrice() {
         Data data = new Data();
         data.getWarframeSetPrices(warframe);
-        setsMaxPrice.setText("Max: "+warframe.getSetMax());
-        setsMinPrice.setText("Min: "+warframe.getSetMin());
-        setsAvgPrice.setText("Avg: "+warframe.getSetAVG());
+        setsMaxPrice.setText("Max: " + warframe.getSetMax());
+        setsMinPrice.setText("Min: " + warframe.getSetMin());
+        setsAvgPrice.setText("Avg: " + warframe.getSetAVG());
     }
 
     /**
@@ -162,7 +162,7 @@ public class WarframePanel extends JFrame {
      * This function allows the addition of 1 blueprint
      */
     public void addBlueprint() {
-        warframe.setBlueprint(warframe.getBlueprint()+1);
+        warframe.setBlueprint(warframe.getBlueprint() + 1);
         updatePanel();
     }
 
@@ -170,7 +170,7 @@ public class WarframePanel extends JFrame {
      * This function allows the removal of 1 blueprint
      */
     private void removeBlueprint() {
-        warframe.setBlueprint(warframe.getBlueprint()-1);
+        warframe.setBlueprint(warframe.getBlueprint() - 1);
         updatePanel();
     }
 
@@ -178,7 +178,7 @@ public class WarframePanel extends JFrame {
      * This function allows the addition of 1 neuroptic
      */
     private void addNeuroptic() {
-        warframe.setNeuroptics(warframe.getNeuroptics()+1);
+        warframe.setNeuroptics(warframe.getNeuroptics() + 1);
         updatePanel();
     }
 
@@ -186,15 +186,16 @@ public class WarframePanel extends JFrame {
      * This function allows the removal of 1 neuroptic
      */
     private void removeNeuroptic() {
-        warframe.setNeuroptics(warframe.getNeuroptics()-1);
-        updatePanel();updatePanel();
+        warframe.setNeuroptics(warframe.getNeuroptics() - 1);
+        updatePanel();
+        updatePanel();
     }
 
     /**
      * This function allows the addition of 1 chassis
      */
     private void addChassis() {
-        warframe.setChassis(warframe.getChassis()+1);
+        warframe.setChassis(warframe.getChassis() + 1);
         updatePanel();
     }
 
@@ -202,7 +203,7 @@ public class WarframePanel extends JFrame {
      * This function allows the removal of 1 chassis
      */
     private void removeChassis() {
-        warframe.setChassis(warframe.getChassis()-1);
+        warframe.setChassis(warframe.getChassis() - 1);
         updatePanel();
     }
 
@@ -210,7 +211,7 @@ public class WarframePanel extends JFrame {
      * This function allows the addition of 1 system
      */
     private void addSystem() {
-        warframe.setSystems(warframe.getSystem()+1);
+        warframe.setSystems(warframe.getSystem() + 1);
         updatePanel();
     }
 
@@ -218,7 +219,7 @@ public class WarframePanel extends JFrame {
      * This function allows the removal of 1 system
      */
     private void removeSystem() {
-        warframe.setSystems(warframe.getSystem()+1);
+        warframe.setSystems(warframe.getSystem() + 1);
         updatePanel();
     }
 
@@ -226,10 +227,10 @@ public class WarframePanel extends JFrame {
      * This function adds +1 to everything
      */
     private void addTotal(int add) {
-        warframe.setBlueprint(warframe.getBlueprint()+add);
-        warframe.setSystems(warframe.getSystem()+add);
-        warframe.setChassis(warframe.getChassis()+add);
-        warframe.setNeuroptics(warframe.getNeuroptics()+add);
+        warframe.setBlueprint(warframe.getBlueprint() + add);
+        warframe.setSystems(warframe.getSystem() + add);
+        warframe.setChassis(warframe.getChassis() + add);
+        warframe.setNeuroptics(warframe.getNeuroptics() + add);
         updatePanel();
     }
 
@@ -237,15 +238,16 @@ public class WarframePanel extends JFrame {
      * This function subtracts -1 to everything
      */
     private void removeTotal(int subtract) {
-        warframe.setBlueprint(warframe.getBlueprint()-subtract);
-        warframe.setSystems(warframe.getSystem()-subtract);
-        warframe.setChassis(warframe.getChassis()-subtract);
-        warframe.setNeuroptics(warframe.getNeuroptics()-subtract);
+        warframe.setBlueprint(warframe.getBlueprint() - subtract);
+        warframe.setSystems(warframe.getSystem() - subtract);
+        warframe.setChassis(warframe.getChassis() - subtract);
+        warframe.setNeuroptics(warframe.getNeuroptics() - subtract);
         updatePanel();
     }
 
     /**
      * This function allows the change of the entire blueprint amount
+     * 
      * @param input the new amount of blueprints
      */
     private void changeBlueprint(JTextField input) {
@@ -255,6 +257,7 @@ public class WarframePanel extends JFrame {
 
     /**
      * This function allows the change of the entire neuroptics amount
+     * 
      * @param input the new amount of neuroptics
      */
     private void changeNeuroptic(JTextField input) {
@@ -264,6 +267,7 @@ public class WarframePanel extends JFrame {
 
     /**
      * This function allows the change of the entire systems amount
+     * 
      * @param input the new amount of systems
      */
     private void changeSystem(JTextField input) {
@@ -273,6 +277,7 @@ public class WarframePanel extends JFrame {
 
     /**
      * This function allows the change of the entire chassis amount
+     * 
      * @param input the new amount of chassis
      */
     private void changeChassis(JTextField input) {
@@ -282,14 +287,15 @@ public class WarframePanel extends JFrame {
 
     /**
      * This function allows the change of the entire total amount
+     * 
      * @param input the new amount of all components
      */
     private void changeTotal(JTextField input) {
         int oldSets = warframe.getTotal();
-        if(oldSets > Integer.parseInt(input.getText())) {
-            removeTotal(oldSets-Integer.parseInt(input.getText()));
+        if (oldSets > Integer.parseInt(input.getText())) {
+            removeTotal(oldSets - Integer.parseInt(input.getText()));
         } else {
-            addTotal(Integer.parseInt(input.getText())-oldSets);
+            addTotal(Integer.parseInt(input.getText()) - oldSets);
         }
         updatePanel();
     }
