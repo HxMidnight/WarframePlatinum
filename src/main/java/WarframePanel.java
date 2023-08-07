@@ -7,6 +7,7 @@ import java.awt.event.WindowEvent;
  * This class represents the panel shown after user clicks on a warframe AKA
  * inventory management
  */
+
 public class WarframePanel extends JFrame {
     JPanel warframePan = new JPanel();
     Warframe warframe;
@@ -53,7 +54,7 @@ public class WarframePanel extends JFrame {
         warframePan.setBackground(new Color(53, 60, 69));
         warframePan.setBounds(10, 10, 530, 530);
         GridLayout grid = new GridLayout();
-        UIManager.put("Button.background", new Color(86, 112, 147));
+        UIManager.put("Button.background", new Color(126, 149, 180));
         grid.setHgap(10);
         grid.setVgap(10);
 
