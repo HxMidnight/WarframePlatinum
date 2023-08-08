@@ -52,9 +52,9 @@ public class WarframePanel extends JFrame {
         this.warframe = warframe;
         updatePanel();
         warframePan.setBackground(new Color(53, 60, 69));
+        UIManager.put("Button.background", new Color(126, 149, 180));
         warframePan.setBounds(10, 10, 530, 530);
         GridLayout grid = new GridLayout();
-        UIManager.put("Button.background", new Color(126, 149, 180));
         grid.setHgap(10);
         grid.setVgap(10);
 
