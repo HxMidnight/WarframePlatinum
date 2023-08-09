@@ -22,7 +22,7 @@ public class IntroWindow extends JFrame {
      */
     public IntroWindow(String title) {
         lblQuestion.setForeground(Color.white);
-        qstPane.setBackground(Color.red);
+        qstPane.setBackground(new Color(53, 60, 69));
         qstPane.setBounds(10, 10, 100, 1000);
 
         introPane.setBackground(Color.black);

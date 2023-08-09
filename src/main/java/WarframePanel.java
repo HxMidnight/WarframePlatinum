@@ -13,36 +13,36 @@ public class WarframePanel extends JFrame {
     Warframe warframe;
     // BLUEPRINTS
     JLabel blueprintLabel = new JLabel("Blueprints: ");
-    JButton addBPButton = new JButton("+");
+    JButton addBPButton = new RoundedButton("+");
     JTextField bpTextField = new JTextField(2);
-    JButton removeBPButton = new JButton("-");
+    JButton removeBPButton = new RoundedButton("-");
     // NEUROPTICS
     JLabel neuropticLabel = new JLabel("Neuroptics: ");
-    JButton addNeuroButton = new JButton("+");
+    JButton addNeuroButton = new RoundedButton("+");
     JTextField neuropticTextField = new JTextField(2);
-    JButton removeNeuroButton = new JButton("-");
+    JButton removeNeuroButton = new RoundedButton("-");
     // CHASSIS
     JLabel chassisLabel = new JLabel("Chassis: ");
-    JButton addChassisButton = new JButton("+");
+    JButton addChassisButton = new RoundedButton("+");
     JTextField chassisTextField = new JTextField(2);
-    JButton removeChassisButton = new JButton("-");
+    JButton removeChassisButton = new RoundedButton("-");
     // SYSTEMS
     JLabel systemLabel = new JLabel("Systems: ");
-    JButton addSystemButton = new JButton("+");
+    JButton addSystemButton = new RoundedButton("+");
     JTextField systemTextField = new JTextField(2);
-    JButton removeSystemButton = new JButton("-");
+    JButton removeSystemButton = new RoundedButton("-");
     // TOTAL
     JLabel setsLabel = new JLabel("Sets: ");
-    JButton addSetsButton = new JButton("+");
+    JButton addSetsButton = new RoundedButton("+");
     JTextField setsTextField = new JTextField(2);
-    JButton removeSetsButton = new JButton("-");
+    JButton removeSetsButton = new RoundedButton("-");
     JLabel setsMaxPrice = new JLabel();
     JLabel setsMinPrice = new JLabel();
     JLabel setsAvgPrice = new JLabel();
 
-    JButton getPrices = new JButton("Call Prices");
+    JButton getPrices = new RoundedButton("Call Prices");
 
-    JButton backButton = new JButton("Back");
+    JButton backButton = new RoundedButton("Back");
 
     /**
      * This is the constructor that adds all buttons and functions to them
