@@ -112,51 +112,51 @@ public class WarframePanel extends JFrame {
         gbc.gridy = 1;
         warframePan.add(blueprintLabel, gbc);
         gbc.gridx = 2;
-        warframePan.add(addBPButton, gbc);
+        warframePan.add(removeBPButton, gbc);
         gbc.gridx = 3;
         warframePan.add(bpTextField, gbc);
         gbc.gridx = 4;
-        warframePan.add(removeBPButton, gbc);
+        warframePan.add(addBPButton, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 2;
         warframePan.add(neuropticLabel, gbc);
         gbc.gridx = 2;
-        warframePan.add(addNeuroButton, gbc);
+        warframePan.add(removeNeuroButton, gbc);
         gbc.gridx = 3;
         warframePan.add(neuropticTextField, gbc);
         gbc.gridx = 4;
-        warframePan.add(removeNeuroButton, gbc);
+        warframePan.add(addNeuroButton, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 3;
         warframePan.add(chassisLabel, gbc);
         gbc.gridx = 2;
-        warframePan.add(addChassisButton, gbc);
+        warframePan.add(removeChassisButton, gbc);
         gbc.gridx = 3;
         warframePan.add(chassisTextField, gbc);
         gbc.gridx = 4;
-        warframePan.add(removeChassisButton, gbc);
+        warframePan.add(addChassisButton, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 4;
         warframePan.add(systemLabel, gbc);
         gbc.gridx = 2;
-        warframePan.add(addSystemButton, gbc);
+        warframePan.add(removeSystemButton, gbc);
         gbc.gridx = 3;
         warframePan.add(systemTextField, gbc);
         gbc.gridx = 4;
-        warframePan.add(removeSystemButton, gbc);
+        warframePan.add(addSystemButton, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 5;
         warframePan.add(setsLabel, gbc);
         gbc.gridx = 2;
-        warframePan.add(addSetsButton, gbc);
+        warframePan.add(removeSetsButton, gbc);
         gbc.gridx = 3;
         warframePan.add(setsTextField, gbc);
         gbc.gridx = 4;
-        warframePan.add(removeSetsButton, gbc);
+        warframePan.add(addSetsButton, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 6;
