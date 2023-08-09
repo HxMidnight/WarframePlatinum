@@ -9,7 +9,7 @@ import java.awt.event.WindowEvent;
  */
 
 public class WarframePanel extends JFrame {
-    JPanel warframePan = new JPanel();
+    JPanel warframePan = new JPanel(new GridBagLayout());
     Warframe warframe;
     // BLUEPRINTS
     JLabel blueprintLabel = new JLabel("Blueprints: ");
@@ -50,13 +50,12 @@ public class WarframePanel extends JFrame {
     public WarframePanel(Warframe warframe) {
         super();
         this.warframe = warframe;
-        updatePanel();
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
         warframePan.setBackground(new Color(53, 60, 69));
         UIManager.put("Button.background", new Color(126, 149, 180));
         warframePan.setBounds(10, 10, 530, 530);
-        GridLayout grid = new GridLayout();
-        grid.setHgap(10);
-        grid.setVgap(10);
 
         getPrices.addActionListener(e -> getWarframePrice());
 
@@ -98,35 +97,57 @@ public class WarframePanel extends JFrame {
         this.setBackground(Color.BLACK);
         this.setBounds(10, 10, 565, 565);
         this.add(warframePan);
-        warframePan.add(getPrices);
-        warframePan.add(blueprintLabel);
-        warframePan.add(addBPButton);
-        warframePan.add(bpTextField);
-        warframePan.add(removeBPButton);
+        warframePan.add(getPrices, gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        warframePan.add(blueprintLabel, gbc);
+        gbc.gridx = 2;
+        warframePan.add(addBPButton, gbc);
+        gbc.gridx = 3;
+        warframePan.add(bpTextField, gbc);
+        gbc.gridx = 4;
+        warframePan.add(removeBPButton, gbc);
 
-        warframePan.add(neuropticLabel);
-        warframePan.add(addNeuroButton);
-        warframePan.add(neuropticTextField);
-        warframePan.add(removeNeuroButton);
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        warframePan.add(neuropticLabel, gbc);
+        gbc.gridx = 2;
+        warframePan.add(addNeuroButton, gbc);
+        gbc.gridx = 3;
+        warframePan.add(neuropticTextField, gbc);
+        gbc.gridx = 4;
+        warframePan.add(removeNeuroButton, gbc);
 
-        warframePan.add(chassisLabel);
-        warframePan.add(addChassisButton);
-        warframePan.add(chassisTextField);
-        warframePan.add(removeChassisButton);
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        warframePan.add(chassisLabel, gbc);
+        gbc.gridx = 2;
+        warframePan.add(addChassisButton, gbc);
+        gbc.gridx = 3;
+        warframePan.add(chassisTextField, gbc);
+        gbc.gridx = 4;
+        warframePan.add(removeChassisButton, gbc);
 
-        warframePan.add(systemLabel);
-        warframePan.add(addSystemButton);
-        warframePan.add(systemTextField);
-        warframePan.add(removeSystemButton);
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        warframePan.add(systemLabel, gbc);
+        gbc.gridx = 2;
+        warframePan.add(addSystemButton, gbc);
+        gbc.gridx = 3;
+        warframePan.add(systemTextField, gbc);
+        gbc.gridx = 4;
+        warframePan.add(removeSystemButton, gbc);
 
-        warframePan.add(setsLabel);
-        warframePan.add(addSetsButton);
-        warframePan.add(setsTextField);
-        warframePan.add(removeSetsButton);
-        warframePan.add(setsMaxPrice);
-        warframePan.add(setsMinPrice);
-        warframePan.add(setsAvgPrice);
-        warframePan.add(backButton);
+        warframePan.add(setsLabel, gbc);
+        warframePan.add(addSetsButton, gbc);
+        warframePan.add(setsTextField, gbc);
+        warframePan.add(removeSetsButton, gbc);
+        warframePan.add(setsMaxPrice, gbc);
+        warframePan.add(setsMinPrice, gbc);
+        warframePan.add(setsAvgPrice, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        warframePan.add(backButton, gbc);
 
         this.addWindowListener(new WindowAdapter() {
             @Override
