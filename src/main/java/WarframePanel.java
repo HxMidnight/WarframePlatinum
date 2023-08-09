@@ -261,7 +261,7 @@ public class WarframePanel extends JFrame {
      * This function allows the removal of 1 system
      */
     private void removeSystem() {
-        warframe.setSystems(warframe.getSystem() + 1);
+        warframe.setSystems(warframe.getSystem() - 1);
         updatePanel();
     }
 

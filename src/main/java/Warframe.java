@@ -117,7 +117,7 @@ public class Warframe {
      * @param system this warframe's new systems amount
      */
     public void setSystems(int system) {
-        if(systems < 0){
+        if(system < 0){
             return;
         }
         this.systems = system;
