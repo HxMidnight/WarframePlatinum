@@ -8,7 +8,7 @@ import java.awt.*;
 public class IntroWindow extends JFrame {
     JPanel introPane = new JPanel();
     JPanel qstPane = new JPanel();
-    JButton btnAccept = new JButton("Yes");
+    JButton btnAccept = new RoundedButton("Yes");
 
     JButton btnDeny = new RoundedButton("No");
 
