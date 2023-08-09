@@ -97,7 +97,17 @@ public class WarframePanel extends JFrame {
         this.setBackground(Color.BLACK);
         this.setBounds(10, 10, 565, 565);
         this.add(warframePan);
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gbc.weightx = 0.5;
+        gbc.weighty = 0.5;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+
+        gbc.gridx = 5;
+        gbc.gridy = 9;
         warframePan.add(getPrices, gbc);
+
         gbc.gridx = 1;
         gbc.gridy = 1;
         warframePan.add(blueprintLabel, gbc);
@@ -138,12 +148,22 @@ public class WarframePanel extends JFrame {
         gbc.gridx = 4;
         warframePan.add(removeSystemButton, gbc);
 
+        gbc.gridx = 1;
+        gbc.gridy = 5;
         warframePan.add(setsLabel, gbc);
+        gbc.gridx = 2;
         warframePan.add(addSetsButton, gbc);
+        gbc.gridx = 3;
         warframePan.add(setsTextField, gbc);
+        gbc.gridx = 4;
         warframePan.add(removeSetsButton, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 6;
         warframePan.add(setsMaxPrice, gbc);
+        gbc.gridy = 7;
         warframePan.add(setsMinPrice, gbc);
+        gbc.gridy = 8;
         warframePan.add(setsAvgPrice, gbc);
         gbc.gridx = 0;
         gbc.gridy = 0;
