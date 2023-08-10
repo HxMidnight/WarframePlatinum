@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class MainFrame extends JFrame {
     ArrayList<JButton> frameButtons = new ArrayList<>();
     JButton btnBack = new RoundedButton("");
-    JPanel btnPanel = new JPanel();
+    JPanel btnPanel = new JPanel(new GridBagLayout());
     JPanel redPanel = new JPanel();
 
     /**
@@ -17,12 +17,15 @@ public class MainFrame extends JFrame {
      * @param title the name of the window/application
      */
     public MainFrame(String title) {
+        int ycoords = 0;
+        int xcoords = 0;
+
         int frameAmount = Main.warframeArrayList.size();
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
         btnPanel.setBackground(new Color(53, 60, 69));
         btnPanel.setBounds(10, 10, 530, 530);
-        GridLayout grid = new GridLayout();
-        grid.setHgap(10);
-        grid.setVgap(10);
         this.setBounds(10, 10, 565, 565);
 
         btnBack.setText("All Prices");
@@ -34,7 +37,14 @@ public class MainFrame extends JFrame {
             btn.setHorizontalAlignment(JButton.LEFT);
             btn.setHorizontalTextPosition(JButton.RIGHT);
             btn.addActionListener(e -> openWindow(warframe));
+            gbc.gridx = xcoords;
+            gbc.gridy = ycoords;
             frameButtons.add(btn);
+            ycoords++;
+            if (ycoords > 5) {
+                ycoords = 0;
+                xcoords++;
+            }
         }
 
         this.setTitle(title);
